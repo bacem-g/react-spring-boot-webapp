@@ -22,7 +22,7 @@ public class Customer {
 
     private String phone;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Address address;
 
     @OneToMany(mappedBy = "customer")
@@ -69,4 +69,8 @@ public class Customer {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+    public Address getAddress() { return address; }
+
+    public void setAddress(Address address) { this.address = address; }
 }
