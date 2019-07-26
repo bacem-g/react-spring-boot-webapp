@@ -29,3 +29,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### React ###
+/src/main/webApp/node_modules/
