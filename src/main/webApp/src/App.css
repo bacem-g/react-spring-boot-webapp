@@ -1,3 +1,15 @@
 .navbar-nav.navbar-center {
     margin: auto;
 }
+
+#myNavBar {
+    margin: 0 0 50px 0;
+}
+
+a {
+    text-decoration: none !important
+  }
+
+  .is-active {
+    background-color: rgb(236, 239, 241)
+  }
