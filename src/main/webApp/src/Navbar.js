@@ -1,7 +1,7 @@
 
 import React from 'react'
 import classNames from 'classnames'
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 const Navbar = () => {
     return (
@@ -13,9 +13,9 @@ const Navbar = () => {
             </button>
             <div className={classNames('collapse', 'navbar-collapse')} id="myNavbar">
                 <div className={classNames('navbar-nav', 'navbar-center')} >
-                    <NavLink to="/customers" activeClassName='is-active'><a className={classNames('nav-item', 'nav-link')}>Customers</a></NavLink>
-                    <NavLink to="/orders" activeClassName='is-active'><a className={classNames('nav-item', 'nav-link')}>Orders</a></NavLink>
-                    <NavLink to="/products" activeClassName='is-active'><a className={classNames('nav-item', 'nav-link')}>Products</a></NavLink>
+                    <NavLink to="/customers" activeClassName='is-active' className={classNames('nav-item', 'nav-link')}>Customers</NavLink>
+                    <NavLink to="/orders" activeClassName='is-active' className={classNames('nav-item', 'nav-link')}>Orders</NavLink>
+                    <NavLink to="/products" activeClassName='is-active' className={classNames('nav-item', 'nav-link')}>Products</NavLink>
                 </div>
             </div>
         </nav>

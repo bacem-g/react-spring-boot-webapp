@@ -9,7 +9,7 @@ import ProductComponent from './components/ProductComponent'
 function App() {
   return (
     <Router>
-      <div class="container">
+      <div className="container">
         <Navbar />
         <Route path="/" exact component={CustomerComponent} />
         <Route path="/customers/" component={CustomerComponent} />
