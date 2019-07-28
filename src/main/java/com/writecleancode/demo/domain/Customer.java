@@ -1,8 +1,14 @@
 package com.writecleancode.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.List;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 
 @Entity
@@ -13,15 +19,20 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotBlank
     private String firstName;
 
+    @NotBlank
     private String lastName;
 
+    @NotNull
+    @JsonFormat(pattern="dd/MM/yyyy")
     @Temporal(TemporalType.DATE)
     private Date birthdate;
 
     private String phone;
 
+    @Valid
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
 

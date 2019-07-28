@@ -15,6 +15,14 @@ const AddCustomerComponent = (props) => {
         address: { country: '', city: '' }
     })
     const [pageType, setPagetype] = useState('ADD')
+    const [formErrors, setFormErrors] = useState(
+        {
+            firstName: null,
+            lastName: null,
+            birthdate: null,
+            country: null,
+        }
+    )
 
 useEffect(() => {
     const { params } = props.match;
@@ -40,6 +48,10 @@ useEffect(() => {
 
     const saveCustomer = (event) => {
         event.preventDefault();
+        if(!validateForm()) {
+            return
+        }
+
         axios.post("/api/customers", form)
             .then(response => {
                 if(pageType === 'ADD') {
@@ -53,6 +65,24 @@ useEffect(() => {
             .catch(error => {
                 alert.error('Error: Could not save the customer')
             })
+    }
+
+    const validateForm = () => {
+        let formErrors = {}
+        const dateRegEx = /^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/]\d{4}$/
+        //formErrors.firstName = form.firstName === '' ? 'firstName is required': null
+        formErrors.lastName = form.lastName === '' ? 'lastName is required': null
+        formErrors.birthdate = form.birthdate === '' ? 'birthdate is required': null
+        formErrors.birthdate = !form.birthdate.match(dateRegEx) ? 'birthdate should be in the format dd/MM/yyyy' : null
+        formErrors.country = form.address.country === '' ? 'country is required' : null
+
+        setFormErrors(formErrors)
+
+        if(Object.values(formErrors).every(x => (x === null || x === ''))) {
+            return true
+        }
+
+        return false
     }
 
     const clearForm = () => {
@@ -73,25 +103,36 @@ useEffect(() => {
             {pageType === 'EDIT' && <h4>Edit customer</h4>}
             <br />
             <form>
-                <div className="form-group row">
+                <div className={classnames('form-group', 'row')} >
                     <label className="col-sm-2 col-form-label">First name</label>
-                    <div className="col-sm-4">
-                        <input id="firstName" type="text" className="form-control" placeholder="First name"
+                    <div className='col-sm-4'>
+                        <input id="firstName" type="text"
+                            className={classnames('form-control', formErrors.firstName && 'border-danger')}
+                            placeholder="First name"
                             onChange={handleFormChange} value={form.firstName}/>
+                        {formErrors.firstName && <span className='text-danger'>{formErrors.firstName}</span>}
                     </div>
                 </div>
                 <div className="form-group row">
                     <label className="col-sm-2 col-form-label">Last name</label>
                     <div className="col-sm-4">
-                        <input id="lastName" type="text" className="form-control" placeholder="Last name"
+                        <input id="lastName" type="text"
+                            className={classnames('form-control', formErrors.lastName && 'border-danger')}
+                        placeholder="Last name"
                             onChange={handleFormChange} value={form.lastName}/>
+                        {formErrors.lastName && <span className='text-danger'>{formErrors.lastName}</span>}
+
                     </div>
                 </div>
                 <div className="form-group row">
                     <label className="col-sm-2 col-form-label">Birthdate</label>
                     <div className="col-sm-4">
-                        <input id="birthdate" type="text" className="form-control" placeholder="Birthdate"
+                        <input id="birthdate" type="text"
+                            className={classnames('form-control', formErrors.birthdate && 'border-danger')}
+                            placeholder="Birthdate"
                             onChange={handleFormChange} value={form.birthdate}/>
+                        {formErrors.birthdate && <span className='text-danger'>{formErrors.birthdate}</span>}
+
                     </div>
                 </div>
                 <div className="form-group row">
@@ -106,6 +147,7 @@ useEffect(() => {
                     <div className="col-sm-4">
                         <CountryList onSelect={handleAddressChange}
                             selectedCountry={form.address.country}
+                            errorMessage={formErrors.country}
                         />
                     </div>
                 </div>

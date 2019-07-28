@@ -32,3 +32,4 @@ build/
 
 ### React ###
 /src/main/webApp/node_modules/
+/src/main/webApp/package-lock.json

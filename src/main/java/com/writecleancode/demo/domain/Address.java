@@ -1,6 +1,7 @@
 package com.writecleancode.demo.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "ADDRESS")
@@ -10,6 +11,7 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotBlank
     private String country;
     private String city;
     private String district;
