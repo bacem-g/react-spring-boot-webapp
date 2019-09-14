@@ -1,5 +1,4 @@
 import Axios from "axios";
-import { tsPropertySignature } from "@babel/types";
 
 export const USER_NAME_SESSION_ATTRIBUTE_NAME = 'authenticatedUser'
 

@@ -12,9 +12,9 @@ public class AuthenticationResource {
     public ResponseEntity<User> authenticate() {
         User user = new User();
         user.setId(1L);
-        user.setUsername("bacem_g");
+        user.setUsername("user");
         user.setFirstName("bacem");
-        user.setLastName("user");
+        user.setLastName("ghali");
 
         return ResponseEntity.ok(user);
     }

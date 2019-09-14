@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import classnames from 'classnames'
 import axios from 'axios';
-import { useAlert } from 'react-alert'
 import AuthenticationService from './AuthenticationService';
 import { publishAuthenticated } from './AuthenticatedSubject';
 
 const LoginComponent = (props) => {
-    const alert = useAlert()
     const [credentials, setCredentials] = useState({
         username: '',
         password: ''
@@ -58,15 +56,6 @@ const LoginComponent = (props) => {
         }
 
         return false
-    }
-
-    const clearForm = () => {
-        const newForm = {
-            username: '',
-            password: ''
-        }
-
-        setCredentials(newForm)
     }
 
     return (

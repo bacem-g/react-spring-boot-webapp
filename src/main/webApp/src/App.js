@@ -8,8 +8,11 @@ import ProductComponent from './components/ProductComponent'
 import AddCustomerComponent from './components/AddCustomerComponent';
 import LoginComponent from './components/authentication/LoginComponent';
 import AuthenticatedRoute from './components/authentication/AuthenticatedRoute';
+import configureAxiosInterceptors from './components/authentication/AxiosConfig'
 
 function App() {
+  configureAxiosInterceptors()
+
   return (
     <Router>
       <div className="container">

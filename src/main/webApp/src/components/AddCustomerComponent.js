@@ -36,7 +36,7 @@ useEffect(() => {
                     alert.error('Could not retrive customer with id ' + params.id)
               })
     }
-}, [])
+}, [alert, props.match])
 
     const handleFormChange = (event) => {
         setForm({ ...form, [event.target.id]: event.target.value })
@@ -69,8 +69,8 @@ useEffect(() => {
 
     const validateForm = () => {
         let formErrors = {}
-        const dateRegEx = /^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/]\d{4}$/
-        //formErrors.firstName = form.firstName === '' ? 'firstName is required': null
+        const dateRegEx = /^(0?[1-9]|[12][0-9]|3[01])[/](0?[1-9]|1[012])[/]\d{4}$/
+        formErrors.firstName = form.firstName === '' ? 'firstName is required': null
         formErrors.lastName = form.lastName === '' ? 'lastName is required': null
         formErrors.birthdate = form.birthdate === '' ? 'birthdate is required': null
         formErrors.birthdate = !form.birthdate.match(dateRegEx) ? 'birthdate should be in the format dd/MM/yyyy' : null
