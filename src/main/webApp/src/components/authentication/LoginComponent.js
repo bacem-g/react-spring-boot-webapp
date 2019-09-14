@@ -3,6 +3,7 @@ import classnames from 'classnames'
 import axios from 'axios';
 import { useAlert } from 'react-alert'
 import AuthenticationService from './AuthenticationService';
+import { publishAuthenticated } from './AuthenticatedSubject';
 
 const LoginComponent = (props) => {
     const alert = useAlert()
@@ -38,6 +39,7 @@ const LoginComponent = (props) => {
             .then(response => {
                 setloginError(false)
                 AuthenticationService.registerSuccessfulLogin(credentials.username)
+                publishAuthenticated(response.data)
                 props.history.push('/customers')
             })
             .catch(error => {
@@ -90,7 +92,12 @@ const LoginComponent = (props) => {
                         <input id="password" type="password"
                             className={classnames('form-control', formErrors.password && 'border-danger')}
                             placeholder="Password"
-                            onChange={handleCredentialsChange} value={credentials.password} />
+                            onChange={handleCredentialsChange} value={credentials.password}
+                            onKeyPress={event => {
+                                if (event.key === 'Enter') {
+                                    attemptLogin(event)
+                                }
+                              }} />
                         {formErrors.password && <span className='text-danger'>{formErrors.password}</span>}
 
                     </div>
@@ -103,5 +110,6 @@ const LoginComponent = (props) => {
         </div >
     )
 }
+
 
 export default LoginComponent

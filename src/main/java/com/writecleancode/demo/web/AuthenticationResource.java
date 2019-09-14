@@ -14,7 +14,7 @@ public class AuthenticationResource {
         user.setId(1L);
         user.setUsername("bacem_g");
         user.setFirstName("bacem");
-        user.setLastName("ghali");
+        user.setLastName("user");
 
         return ResponseEntity.ok(user);
     }
