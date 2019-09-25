@@ -4,8 +4,10 @@ https://writecleancode.com/spring-boot-react-web-application/
 `mvn spring-boot:run`
 
 ### To run the frontend:
-`cd src/main/webApp`
-`npm install`
-`npm start`
+```
+cd src/main/webApp
+npm install
+npm start
+```
 
-To login, the credentials are user/password.
+Use the credentials `user/password` to login.
