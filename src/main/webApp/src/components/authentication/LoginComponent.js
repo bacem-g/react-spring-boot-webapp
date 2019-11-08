@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import classnames from 'classnames'
 import axios from 'axios';
 import AuthenticationService from './AuthenticationService';
@@ -64,7 +64,11 @@ const LoginComponent = (props) => {
             <br />
             {loginError && <div className={classnames('text-danger', 'offset-sm-2')}>Bad credentials</div>}
             <br />
-            <form>
+            <form onKeyPress={event => {
+                                if (event.key === 'Enter') {
+                                    attemptLogin(event)
+                                }
+                              }} >
                 <div className={classnames('form-group', 'row')} >
                     <label className="col-sm-2 col-form-label">Username</label>
                     <div className='col-sm-4'>
@@ -82,11 +86,7 @@ const LoginComponent = (props) => {
                             className={classnames('form-control', formErrors.password && 'border-danger')}
                             placeholder="Password"
                             onChange={handleCredentialsChange} value={credentials.password}
-                            onKeyPress={event => {
-                                if (event.key === 'Enter') {
-                                    attemptLogin(event)
-                                }
-                              }} />
+                            />
                         {formErrors.password && <span className='text-danger'>{formErrors.password}</span>}
 
                     </div>

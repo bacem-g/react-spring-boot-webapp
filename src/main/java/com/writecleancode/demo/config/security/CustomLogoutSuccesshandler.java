@@ -14,6 +14,6 @@ class CustomLogoutSuccessHandler extends
 
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        //Do nothing just to avoid redirection to /login?logout
+        //Do nothing just to avoid redirection to /login?success
     }
 }
