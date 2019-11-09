@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import CountryList from './CountryListComponent'
 import classnames from 'classnames'
 import axios from 'axios';
 import { useAlert } from 'react-alert'
 import { Link } from 'react-router-dom'
 import { FormattedMessage } from 'react-intl';
+import UserContext from '../common/context/UserContext';
 
 const AddCustomerComponent = (props) => {
+    const userContext = useContext(UserContext)
     const alert = useAlert()
     const [form, setForm] = useState({
         firstName: '',
@@ -98,10 +100,15 @@ useEffect(() => {
 
     return (
         <div>
+            {JSON.stringify(userContext.user)}
             {pageType === 'ADD' && <h4 className='text-center'><FormattedMessage id='addNewCustomer' /></h4>}
             {pageType === 'EDIT' && <h4 className='text-center'><FormattedMessage id='editCustomer' /></h4>}
             <br />
-            <form>
+            <form onKeyPress={event => {
+                                if (event.key === 'Enter') {
+                                    saveCustomer(event)
+                                }
+                              }} >
                 <div className={classnames('form-group', 'row')} >
                     <label className="col-sm-2 col-form-label"><FormattedMessage id='firstname' /></label>
                     <div className='col-sm-4'>

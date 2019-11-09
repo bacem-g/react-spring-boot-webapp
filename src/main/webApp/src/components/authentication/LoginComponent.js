@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
 import classnames from 'classnames'
 import axios from 'axios';
 import AuthenticationService from './AuthenticationService';
 import { publishAuthenticated } from './AuthenticatedSubject';
 import { FormattedMessage } from 'react-intl';
+import UserContext from '../../common/context/UserContext';
 
 const LoginComponent = (props) => {
+    const userContext = useContext(UserContext)
     const [credentials, setCredentials] = useState({
         username: '',
         password: ''
@@ -39,6 +41,7 @@ const LoginComponent = (props) => {
                 setloginError(false)
                 AuthenticationService.registerSuccessfulLogin(credentials.username)
                 publishAuthenticated(response.data)
+                userContext.setUser(response.data)
                 props.history.push('/customers')
             })
             .catch(error => {

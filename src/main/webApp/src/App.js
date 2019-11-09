@@ -18,6 +18,7 @@ import messages_en from './locale/en.json'
 import locale_en from 'react-intl/locale-data/en';
 import locale_ar from 'react-intl/locale-data/ar';
 import DirectionProvider, { DIRECTIONS } from 'react-with-direction/dist/DirectionProvider';
+import UserProvider from './common/provider/UserProvider';
 
 const messages = {
   'ar': messages_ar,
@@ -41,8 +42,8 @@ function App() {
 
   const switchLanguage = (lang) => {
     setLocale(lang)
-    switch(lang) {
-      case 'ar': 
+    switch (lang) {
+      case 'ar':
         setDirection(DIRECTIONS.RTL)
         break
       case 'en':
@@ -52,23 +53,25 @@ function App() {
   }
 
   return (
-    <DirectionProvider direction={direction} inline={true}>
+    <DirectionProvider direction={direction}>
       <LocaleProvider switchLanguage={switchLanguage}>
-        <IntlProvider locale={locale} messages={messages[locale]}>
-          <AlertProvider template={AlertTemplate} {...alertOptions}>
-            <Router>
-              <div className="container">
-                <Navbar />
-                <Route path="/" exact component={LoginComponent} />
-                <Route path="/login" exact component={LoginComponent} />
-                <AuthenticatedRoute path="/customers/" component={CustomerComponent} />
-                <AuthenticatedRoute path="/orders/" component={OrderComponent} />
-                <AuthenticatedRoute path="/products/" component={ProductComponent} />
-                <AuthenticatedRoute path="/add-edit-customer/:id?" component={AddCustomerComponent} />
-              </div>
-            </Router>
-          </AlertProvider>
-        </IntlProvider>
+        <UserProvider>
+          <IntlProvider locale={locale} messages={messages[locale]}>
+            <AlertProvider template={AlertTemplate} {...alertOptions}>
+              <Router>
+                <div className="container">
+                  <Navbar />
+                  <Route path="/" exact component={LoginComponent} />
+                  <Route path="/login" exact component={LoginComponent} />
+                  <AuthenticatedRoute path="/customers/" component={CustomerComponent} />
+                  <AuthenticatedRoute path="/orders/" component={OrderComponent} />
+                  <AuthenticatedRoute path="/products/" component={ProductComponent} />
+                  <AuthenticatedRoute path="/add-edit-customer/:id?" component={AddCustomerComponent} />
+                </div>
+              </Router>
+            </AlertProvider>
+          </IntlProvider>
+        </UserProvider>
       </LocaleProvider>
     </DirectionProvider>
   );
