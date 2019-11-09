@@ -35,6 +35,7 @@ const Navbar = () => {
                     {isAuthenticated && <NavLink to="/customers" activeClassName='is-active' className={classNames('nav-item', 'nav-link')}><FormattedMessage id='customers' /></NavLink>}
                     {isAuthenticated && <NavLink to="/orders" activeClassName='is-active' className={classNames('nav-item', 'nav-link')}><FormattedMessage id='orders' /></NavLink>}
                     {isAuthenticated && <NavLink to="/products" activeClassName='is-active' className={classNames('nav-item', 'nav-link')}><FormattedMessage id='products' /></NavLink>}
+                    {!isAuthenticated && <NavLink to="/login" activeClassName='is-active' className={classNames('nav-item', 'nav-link')}><FormattedMessage id='login' /></NavLink>}
                     <UncontrolledDropdown nav inNavbar>
                         <DropdownToggle nav caret>
                                 <FontAwesomeIcon icon={faGlobe} />

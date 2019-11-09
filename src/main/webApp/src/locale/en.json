@@ -26,5 +26,6 @@
     "firstNamerequired": "first name required",
     "lastNamerequired": "last name required",
     "birthdateRequired": "birthdate required",
-    "birthdateFormatError" : "birthdate should be in the format dd/MM/yyyy"
+    "birthdateFormatError" : "birthdate should be in the format dd/MM/yyyy",
+    "badCredentials": "Username or password is incorrect"
 }

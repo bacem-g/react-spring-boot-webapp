@@ -42,7 +42,7 @@ const LoginComponent = (props) => {
                 AuthenticationService.registerSuccessfulLogin(credentials.username)
                 publishAuthenticated(response.data)
                 userContext.setUser(response.data)
-                props.history.push('/customers')
+                props.history.push('/home')
             })
             .catch(error => {
                 setloginError(true)
@@ -64,9 +64,7 @@ const LoginComponent = (props) => {
 
     return (
         <div>
-            <h4 className="text-center"><FormattedMessage id='login' /></h4>
             <br />
-            {loginError && <div className={classnames('text-danger', 'offset-sm-2')}>Bad credentials</div>}
             <br />
             <form onKeyPress={event => {
                                 if (event.key === 'Enter') {
@@ -96,10 +94,14 @@ const LoginComponent = (props) => {
                     </div>
                 </div>
             </form>
-            <div className="col-sm-6">
-                <button className={classnames('btn', 'btn-primary', 'float-right', 'mx-1')}
+            <div className='col-sm-6'>
+                <button className={classnames('btn', 'btn-info', 'col-sm-6')}
                     onClick={attemptLogin}><FormattedMessage id='login' /></button>
             </div>
+            <br />
+            {loginError && <div className={classnames('col-sm-6', 'alert', 'alert-danger')}><FormattedMessage id="badCredentials" /></div>}
+                
+            
         </div >
     )
 }

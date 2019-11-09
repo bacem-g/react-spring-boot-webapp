@@ -19,6 +19,7 @@ import locale_en from 'react-intl/locale-data/en';
 import locale_ar from 'react-intl/locale-data/ar';
 import DirectionProvider, { DIRECTIONS } from 'react-with-direction/dist/DirectionProvider';
 import UserProvider from './common/provider/UserProvider';
+import HomeComponent from './components/HomeComponent';
 
 const messages = {
   'ar': messages_ar,
@@ -37,17 +38,20 @@ function App() {
     transition: 'scale'
   }
 
-  const [locale, setLocale] = useState('en')
-  const [direction, setDirection] = useState(DIRECTIONS.LTR)
+  const [locale, setLocale] = useState('ar')
+  const [direction, setDirection] = useState(DIRECTIONS.RTL)
 
   const switchLanguage = (lang) => {
     setLocale(lang)
     switch (lang) {
       case 'ar':
         setDirection(DIRECTIONS.RTL)
+        document.querySelector('html').setAttribute('dir', "rtl");
+
         break
       case 'en':
         setDirection(DIRECTIONS.LTR)
+        document.querySelector('html').setAttribute('dir', "ltr");
         break
     }
   }
@@ -61,8 +65,9 @@ function App() {
               <Router>
                 <div className="container">
                   <Navbar />
-                  <Route path="/" exact component={LoginComponent} />
-                  <Route path="/login" exact component={LoginComponent} />
+                  <Route path="/" exact component={HomeComponent} />
+                  <Route path="/login" exact component={LoginComponent} className="center"/>
+                  <Route path="/home" exact component={HomeComponent} />
                   <AuthenticatedRoute path="/customers/" component={CustomerComponent} />
                   <AuthenticatedRoute path="/orders/" component={OrderComponent} />
                   <AuthenticatedRoute path="/products/" component={ProductComponent} />

@@ -100,7 +100,6 @@ useEffect(() => {
 
     return (
         <div>
-            {JSON.stringify(userContext.user)}
             {pageType === 'ADD' && <h4 className='text-center'><FormattedMessage id='addNewCustomer' /></h4>}
             {pageType === 'EDIT' && <h4 className='text-center'><FormattedMessage id='editCustomer' /></h4>}
             <br />
@@ -164,7 +163,7 @@ useEffect(() => {
             </form>
             <div className="col-sm-6">
 
-                <button className={classnames('btn', 'btn-primary', 'float-right', 'mx-1')}
+                <button className={classnames('btn', 'btn-info', 'float-right', 'mx-1')}
                     onClick={saveCustomer}><FormattedMessage id='save' /></button>
                 <Link to="/customers">
                     <button className={classnames('btn', 'btn-secondary', 'float-right')}><FormattedMessage id='back' /></button>
