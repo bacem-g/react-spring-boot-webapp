@@ -3,6 +3,7 @@ import classnames from 'classnames'
 import axios from 'axios';
 import AuthenticationService from './AuthenticationService';
 import { publishAuthenticated } from './AuthenticatedSubject';
+import { FormattedMessage } from 'react-intl';
 
 const LoginComponent = (props) => {
     const [credentials, setCredentials] = useState({
@@ -60,7 +61,7 @@ const LoginComponent = (props) => {
 
     return (
         <div>
-            <h4>Login</h4>
+            <h4 className="text-center"><FormattedMessage id='login' /></h4>
             <br />
             {loginError && <div className={classnames('text-danger', 'offset-sm-2')}>Bad credentials</div>}
             <br />
@@ -70,7 +71,7 @@ const LoginComponent = (props) => {
                                 }
                               }} >
                 <div className={classnames('form-group', 'row')} >
-                    <label className="col-sm-2 col-form-label">Username</label>
+                    <label className="col-sm-2 col-form-label"><FormattedMessage id='username' /></label>
                     <div className='col-sm-4'>
                         <input id="username" type="text"
                             className={classnames('form-control', formErrors.username && 'border-danger')}
@@ -80,7 +81,7 @@ const LoginComponent = (props) => {
                     </div>
                 </div>
                 <div className="form-group row">
-                    <label className="col-sm-2 col-form-label">Password</label>
+                    <label className="col-sm-2 col-form-label"><FormattedMessage id='password' /></label>
                     <div className="col-sm-4">
                         <input id="password" type="password"
                             className={classnames('form-control', formErrors.password && 'border-danger')}
@@ -94,7 +95,7 @@ const LoginComponent = (props) => {
             </form>
             <div className="col-sm-6">
                 <button className={classnames('btn', 'btn-primary', 'float-right', 'mx-1')}
-                    onClick={attemptLogin}>Login</button>
+                    onClick={attemptLogin}><FormattedMessage id='login' /></button>
             </div>
         </div >
     )

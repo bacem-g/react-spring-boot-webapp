@@ -3,8 +3,12 @@ import axios from 'axios';
 import classnames from 'classnames'
 import { Link } from 'react-router-dom'
 import { useAlert } from 'react-alert'
+import {FormattedMessage, FormattedHTMLMessage} from 'react-intl';
+import withDirection, { withDirectionPropTypes, DIRECTIONS } from 'react-with-direction';
+import { tsPropertySignature } from '@babel/types';
 
-const CustomerComponent = () => {
+
+const CustomerComponent = (props) => {
     const alert = useAlert()
     const [customers, setCustomers] = useState([]);
 
@@ -31,20 +35,20 @@ const CustomerComponent = () => {
     }
 
     return (
-
         <div>
-            <h4>Customers</h4>
+            <h4 className='text-center'><FormattedMessage id='customers' /></h4>
+            <br />
             <Link to="/add-edit-customer">
-                <button className={classnames('btn', 'btn-success', 'float-right')}>Add new Customer</button>
+                <button className={classnames('btn', 'btn-success', 'float-right')}><FormattedMessage id='addNewCustomer' /></button>
             </Link>
             <table className="table">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Firstname</th>
-                        <th>Lastname</th>
-                        <th>Birthdate</th>
-                        <th>Phone</th>
+                        <th><FormattedMessage id='id' /></th>
+                        <th><FormattedMessage id='firstname' /></th>
+                        <th><FormattedMessage id='lastname' /></th>
+                        <th><FormattedMessage id='birthdate' /></th>
+                        <th><FormattedMessage id='phone' /></th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -60,11 +64,11 @@ const CustomerComponent = () => {
                                 <td>{c.phone}</td>
                                 <td>
                                     <Link to={'/add-edit-customer/' + c.id}>
-                                        <button className={classnames('btn', 'btn-sm', 'btn-info')}>Edit</button>
+                                        <button className={classnames('btn', 'btn-sm', 'btn-info')}><FormattedMessage id='edit' /></button>
                                     </Link>
                                 </td>
                                 <td><button className={classnames('btn', 'btn-sm', 'btn-danger')}
-                                            onClick={() => deleteCustomer(c.id)}>Delete</button></td>
+                                            onClick={() => deleteCustomer(c.id)}><FormattedMessage id='delete' /></button></td>
                             </tr>
                         ))
                     }
@@ -74,4 +78,4 @@ const CustomerComponent = () => {
     )
 }
 
-export default CustomerComponent
+export default withDirection(CustomerComponent)

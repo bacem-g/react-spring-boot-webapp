@@ -4,6 +4,7 @@ import classnames from 'classnames'
 import axios from 'axios';
 import { useAlert } from 'react-alert'
 import { Link } from 'react-router-dom'
+import { FormattedMessage } from 'react-intl';
 
 const AddCustomerComponent = (props) => {
     const alert = useAlert()
@@ -56,11 +57,10 @@ useEffect(() => {
             .then(response => {
                 if(pageType === 'ADD') {
                     alert.success('Customer has been created')
-                    clearForm()
                 } else {
                     alert.success('Customer has been updated')
-                    props.history.push('/customers')
                 }
+                props.history.push('/customers')
             })
             .catch(error => {
                 alert.error('Error: Could not save the customer')
@@ -70,11 +70,10 @@ useEffect(() => {
     const validateForm = () => {
         let formErrors = {}
         const dateRegEx = /^(0?[1-9]|[12][0-9]|3[01])[/](0?[1-9]|1[012])[/]\d{4}$/
-        formErrors.firstName = form.firstName === '' ? 'firstName is required': null
-        formErrors.lastName = form.lastName === '' ? 'lastName is required': null
-        formErrors.birthdate = form.birthdate === '' ? 'birthdate is required': null
-        formErrors.birthdate = !form.birthdate.match(dateRegEx) ? 'birthdate should be in the format dd/MM/yyyy' : null
-        formErrors.country = form.address.country === '' ? 'country is required' : null
+        formErrors.firstName = form.firstName === '' ? <FormattedMessage id="firstNamerequired" />: null
+        formErrors.lastName = form.lastName === '' ? <FormattedMessage id="lastNamerequired" />: null
+        formErrors.birthdate = form.birthdate === '' ? <FormattedMessage id="birthdateRequired" />: null
+        formErrors.birthdate = !form.birthdate.match(dateRegEx) ? <FormattedMessage id="birthdateFormatError" /> : null
 
         setFormErrors(formErrors)
 
@@ -99,51 +98,48 @@ useEffect(() => {
 
     return (
         <div>
-            {pageType === 'ADD' && <h4>Add new customer</h4>}
-            {pageType === 'EDIT' && <h4>Edit customer</h4>}
+            {pageType === 'ADD' && <h4 className='text-center'><FormattedMessage id='addNewCustomer' /></h4>}
+            {pageType === 'EDIT' && <h4 className='text-center'><FormattedMessage id='editCustomer' /></h4>}
             <br />
             <form>
                 <div className={classnames('form-group', 'row')} >
-                    <label className="col-sm-2 col-form-label">First name</label>
+                    <label className="col-sm-2 col-form-label"><FormattedMessage id='firstname' /></label>
                     <div className='col-sm-4'>
                         <input id="firstName" type="text"
                             className={classnames('form-control', formErrors.firstName && 'border-danger')}
-                            placeholder="First name"
                             onChange={handleFormChange} value={form.firstName}/>
                         {formErrors.firstName && <span className='text-danger'>{formErrors.firstName}</span>}
                     </div>
                 </div>
                 <div className="form-group row">
-                    <label className="col-sm-2 col-form-label">Last name</label>
+                    <label className="col-sm-2 col-form-label"><FormattedMessage id='lastname' /></label>
                     <div className="col-sm-4">
                         <input id="lastName" type="text"
                             className={classnames('form-control', formErrors.lastName && 'border-danger')}
-                        placeholder="Last name"
                             onChange={handleFormChange} value={form.lastName}/>
                         {formErrors.lastName && <span className='text-danger'>{formErrors.lastName}</span>}
 
                     </div>
                 </div>
                 <div className="form-group row">
-                    <label className="col-sm-2 col-form-label">Birthdate</label>
+                    <label className="col-sm-2 col-form-label"><FormattedMessage id='birthdate' /></label>
                     <div className="col-sm-4">
                         <input id="birthdate" type="text"
                             className={classnames('form-control', formErrors.birthdate && 'border-danger')}
-                            placeholder="Birthdate"
                             onChange={handleFormChange} value={form.birthdate}/>
                         {formErrors.birthdate && <span className='text-danger'>{formErrors.birthdate}</span>}
 
                     </div>
                 </div>
                 <div className="form-group row">
-                    <label className="col-sm-2 col-form-label">Phone</label>
+                    <label className="col-sm-2 col-form-label"><FormattedMessage id='phone' /></label>
                     <div className="col-sm-4">
-                        <input id="phone" type="number" className="form-control" placeholder="Phone"
+                        <input id="phone" type="number" className="form-control"
                             onChange={handleFormChange} value={form.phone}/>
                     </div>
                 </div>
                 <div className="form-group row">
-                    <label className="col-sm-2 col-form-label">Country</label>
+                    <label className="col-sm-2 col-form-label"><FormattedMessage id='country' /></label>
                     <div className="col-sm-4">
                         <CountryList onSelect={handleAddressChange}
                             selectedCountry={form.address.country}
@@ -152,9 +148,9 @@ useEffect(() => {
                     </div>
                 </div>
                 <div className="form-group row">
-                    <label className="col-sm-2 col-form-label">City</label>
+                    <label className="col-sm-2 col-form-label"><FormattedMessage id='city' /></label>
                     <div className="col-sm-4">
-                        <input id="city" type="text" className="form-control" placeholder="City"
+                        <input id="city" type="text" className="form-control"
                             onChange={handleAddressChange} value={form.address.city}/>
                     </div>
                 </div>
@@ -162,9 +158,9 @@ useEffect(() => {
             <div className="col-sm-6">
 
                 <button className={classnames('btn', 'btn-primary', 'float-right', 'mx-1')}
-                    onClick={saveCustomer}>Save</button>
+                    onClick={saveCustomer}><FormattedMessage id='save' /></button>
                 <Link to="/customers">
-                    <button className={classnames('btn', 'btn-secondary', 'float-right')}>Back</button>
+                    <button className={classnames('btn', 'btn-secondary', 'float-right')}><FormattedMessage id='back' /></button>
                 </Link>
             </div>
         </div >

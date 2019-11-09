@@ -1,0 +1,33 @@
+{
+    "customers": "العملاء",
+    "products": "المنتجات",
+    "orders": "الطلبات",
+    "language": "اللغة",
+    "welcomeUser": "مرحبا <b>&nbsp;{user}</b>",
+    "logout": "خروج",
+    "phone": "الجوال",
+    "birthdate": "تاريخ الولادة",
+    "lastname": "اللقب",
+    "firstname": "الاسم",
+    "id": "المعرف",
+    "addNewCustomer": "اضافة عميل",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "login": "تسجيل الدخول",
+    "username": "اسم المستخدم",
+    "password": "كلمة المرور",
+    "home": "الصفحة الرئيسية",
+    "ar": "عربي",
+    "country": "الدولة",
+    "city": "المدينة",
+    "save": "حفظ",
+    "back": "رجوع",
+    "editCustomer": "تحديث بيانات العميل",
+    "firstNamerequired": "الاسم اجباري",
+    "lastNamerequired": "اللقب اجباري",
+    "birthdateRequired": "تاريخ الولادة اجباري",
+    "birthdateFormatError" : "dd/MM/yyyy"
+
+
+
+}
