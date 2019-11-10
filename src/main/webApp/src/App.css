@@ -10,6 +10,8 @@ a {
     text-decoration: none !important
   }
 
-  .is-active {
-    background-color: rgb(236, 239, 241)
-  }
+.is-active {
+    background-color: rgb(236, 239, 241);
+    /* border: 2px solid rgb(238, 229, 229); */
+    border-radius: 12px;
+}
