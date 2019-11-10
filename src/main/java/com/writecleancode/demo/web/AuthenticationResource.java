@@ -13,8 +13,8 @@ public class AuthenticationResource {
         User user = new User();
         user.setId(1L);
         user.setUsername("user");
-        user.setFirstName("bacem");
-        user.setLastName("ghali");
+        user.setFirstName("باسم");
+        user.setLastName("غالي");
 
         return ResponseEntity.ok(user);
     }

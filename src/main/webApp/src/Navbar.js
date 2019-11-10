@@ -52,7 +52,7 @@ const Navbar = () => {
                     </NavLink>}
                 </div>
             </div>
-            {isAuthenticated && <FormattedHTMLMessage id="welcomeUser" values={{ user: user.username }} />}
+            {isAuthenticated && <FormattedHTMLMessage id="welcomeUser" values={{ user: user.firstName }} />}
         </nav>
 
     return (
