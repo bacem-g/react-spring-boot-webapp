@@ -1,8 +1,23 @@
 package com.writecleancode.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "USER")
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false, unique = true)
     private String username;
+
+    @JsonIgnore
+    private String password;
+
     private String firstName;
     private String lastName;
 
@@ -21,6 +36,10 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
+
+    public String getPassword() { return password; }
+
+    public void setPassword(String password) { this.password = password; }
 
     public String getFirstName() {
         return firstName;
