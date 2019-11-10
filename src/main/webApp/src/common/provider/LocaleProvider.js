@@ -7,8 +7,10 @@ const LocaleProvider = (props) => {
 
     const switchLanguage = (lang) => {
         setLocale(lang)
+        localStorage.setItem('locale', lang)
         props.switchLanguage(lang)
     }
+
 
     return (
         <LocaleContext.Provider

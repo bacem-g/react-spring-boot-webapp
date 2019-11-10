@@ -26,32 +26,32 @@ const messages = {
   'en': messages_en
 }
 
-addLocaleData([...locale_en, ...locale_ar]);
+const alertOptions = {
+  position: 'bottom center',
+  timeout: 5000,
+  offset: '30px',
+  transition: 'scale'
+}
 
 function App() {
+  
   configureAxiosInterceptors()
+  addLocaleData([...locale_en, ...locale_ar]);
 
-  const alertOptions = {
-    position: 'bottom center',
-    timeout: 5000,
-    offset: '30px',
-    transition: 'scale'
-  }
-
-  const [locale, setLocale] = useState('ar')
-  const [direction, setDirection] = useState(DIRECTIONS.RTL)
+  const initialLocale = localStorage.getItem('locale') ? localStorage.getItem('locale') : 'ar'
+  const initialDirection = initialLocale === 'ar' ? DIRECTIONS.RTL : DIRECTIONS.LTR
+  const [locale, setLocale] = useState(initialLocale)
+  const [direction, setDirection] = useState(initialDirection)
 
   const switchLanguage = (lang) => {
     setLocale(lang)
     switch (lang) {
       case 'ar':
         setDirection(DIRECTIONS.RTL)
-        document.querySelector('html').setAttribute('dir', "rtl");
 
         break
       case 'en':
         setDirection(DIRECTIONS.LTR)
-        document.querySelector('html').setAttribute('dir', "ltr");
         break
     }
   }
