@@ -20,6 +20,7 @@ import locale_ar from 'react-intl/locale-data/ar';
 import DirectionProvider, { DIRECTIONS } from 'react-with-direction/dist/DirectionProvider';
 import UserProvider from './common/provider/UserProvider';
 import HomeComponent from './components/HomeComponent';
+import { Switch } from 'react-router-dom';
 
 const messages = {
   'ar': messages_ar,
@@ -34,7 +35,7 @@ const alertOptions = {
 }
 
 function App() {
-  
+
   configureAxiosInterceptors()
   addLocaleData([...locale_en, ...locale_ar]);
 
@@ -65,13 +66,15 @@ function App() {
               <Router>
                 <div className="container">
                   <Navbar />
-                  <Route path="/" exact component={HomeComponent} />
-                  <Route path="/login" exact component={LoginComponent} className="center"/>
-                  <Route path="/home" exact component={HomeComponent} />
-                  <AuthenticatedRoute path="/customers/" component={CustomerComponent} />
-                  <AuthenticatedRoute path="/orders/" component={OrderComponent} />
-                  <AuthenticatedRoute path="/products/" component={ProductComponent} />
-                  <AuthenticatedRoute path="/add-edit-customer/:id?" component={AddCustomerComponent} />
+                  <Switch>
+                    <Route path="/" exact component={HomeComponent} />
+                    <Route path="/login" exact component={LoginComponent} className="center" />
+                    <Route path="/home" exact component={HomeComponent} />
+                    <AuthenticatedRoute path="/customers/" component={CustomerComponent} />
+                    <AuthenticatedRoute path="/orders/" component={OrderComponent} />
+                    <AuthenticatedRoute path="/products/" component={ProductComponent} />
+                    <AuthenticatedRoute path="/add-edit-customer/:id?" component={AddCustomerComponent} />
+                  </Switch>
                 </div>
               </Router>
             </AlertProvider>
